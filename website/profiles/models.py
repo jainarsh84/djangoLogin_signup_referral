@@ -15,7 +15,12 @@ class Profile(models.Model):
         return f"{self.user.username}-{self.code}"
 
     def get_recommended_profiles(self):
-        pass
+        query_set = Profiles.objects.all()
+        recs = []
+        for profile in qs:
+            if profile.recommended_by==self.user:
+                recs.append(profile)
+        return recs
 
     def save(self, *args, **kwargs):
         if self.code=="":
